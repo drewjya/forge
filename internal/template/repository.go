@@ -5,7 +5,9 @@ import (
 )
 
 func RepositoryInterface(name string, crud bool) string {
-	N := util.Title(name)
+	nn := util.NewName(name)
+	N := nn.Title()
+	name = nn.Package()
 	module := goModule()
 	if crud {
 		return `package ` + name + `repository
@@ -39,7 +41,9 @@ type I` + N + `Repository interface {
 }
 
 func Repository(name string, crud bool) string {
-	N := util.Title(name)
+	nn := util.NewName(name)
+	N := nn.Title()
+	name = nn.Package()
 	if crud {
 		return `package ` + name + `repository
 

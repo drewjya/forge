@@ -2,7 +2,7 @@ package template
 
 func BobgenYAML() string {
 	return `psql:
-  dsn: ${DATABASE_URL}
+  dsn: "postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable"
   output: "gen/models"
   driver_name: "github.com/jackc/pgx/v5"
 

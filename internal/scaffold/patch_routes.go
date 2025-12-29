@@ -12,7 +12,9 @@ func patchRoutes(feature string) {
 
 	src := read(path)
 
-	Feature := util.Title(feature)
+	nn := util.NewName(feature)
+	feature = nn.Package()
+	Feature := nn.Title()
 
 	// ---- imports ----
 	imports := []string{

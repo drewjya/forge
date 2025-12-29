@@ -2,6 +2,8 @@ package scaffold
 
 import (
 	"strings"
+
+	"github.com/drewjya/forge/internal/util"
 )
 
 func patchBootstrap(feature string) {
@@ -9,6 +11,8 @@ func patchBootstrap(feature string) {
 	path := "bootstrap/module.go"
 
 	src := read(path)
+	nn := util.NewName(feature)
+	feature = nn.Package()
 
 	// ---- import ----
 	importLine := `"` + project + `/internal/modules/` + feature + `"`

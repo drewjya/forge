@@ -5,7 +5,9 @@ import (
 )
 
 func ServiceInterface(name string, crud bool) string {
-	N := util.Title(name)
+	nn := util.NewName(name)
+	N := nn.Title()
+	name = nn.Package()
 	module := goModule()
 	if crud {
 		return `package ` + name + `service
@@ -34,7 +36,9 @@ type I` + N + `Service interface {
 }
 
 func Service(name string, crud bool) string {
-	N := util.Title(name)
+	nn := util.NewName(name)
+	N := nn.Title()
+	name = nn.Package()
 	module := goModule()
 	if crud {
 		return `package ` + name + `service

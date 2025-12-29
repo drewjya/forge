@@ -9,10 +9,14 @@ import (
 )
 
 func RemoveModule(feature string) error {
+
 	feature = strings.ToLower(feature)
 
+	pkg := util.NewName(feature)
+
 	// 1. delete module folder
-	modPath := filepath.Join("internal/modules", feature)
+	modPath := filepath.Join("internal/modules", pkg.Package())
+	println(modPath)
 	if err := os.RemoveAll(modPath); err != nil {
 		return err
 	}

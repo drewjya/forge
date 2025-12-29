@@ -2,21 +2,22 @@ package scaffold
 
 import (
 	"path/filepath"
-	"strings"
 
 	"github.com/drewjya/forge/internal/template"
 	"github.com/drewjya/forge/internal/util"
 )
 
 func AddModule(name string, withCRUD bool) error {
-	name = strings.ToLower(name)
-	base := filepath.Join("internal/modules", name)
+	pkg := util.NewName(name)
+	packg := pkg.Package()
+
+	base := filepath.Join("internal/modules", packg)
 
 	mkdirs := []string{
-		base + "/" + name + "controller",
-		base + "/" + name + "service",
-		base + "/" + name + "repository",
-		base + "/" + name + "routes",
+		base + "/" + packg + "controller",
+		base + "/" + packg + "service",
+		base + "/" + packg + "repository",
+		base + "/" + packg + "routes",
 	}
 
 	for _, d := range mkdirs {
@@ -25,30 +26,29 @@ func AddModule(name string, withCRUD bool) error {
 
 	// --- always generated ---
 	write(base+"/module.go", template.Module(name))
-	write(base+"/"+name+"repository/interface.go", template.RepositoryInterface(name, withCRUD))
-	write(base+"/"+name+"repository/repository.go", template.Repository(name, withCRUD))
+	write(base+"/"+packg+"repository/interface.go", template.RepositoryInterface(name, withCRUD))
+	write(base+"/"+packg+"repository/repository.go", template.Repository(name, withCRUD))
 
-	write(base+"/"+name+"service/interface.go", template.ServiceInterface(name, withCRUD))
-	write(base+"/"+name+"service/service.go", template.Service(name, withCRUD))
+	write(base+"/"+packg+"service/interface.go", template.ServiceInterface(name, withCRUD))
+	write(base+"/"+packg+"service/service.go", template.Service(name, withCRUD))
+	write(base+"/"+packg+"controller/interface.go", template.ControllerInterface(name, withCRUD))
+	write(base+"/"+packg+"controller/controller.go", template.Controller(name, withCRUD))
 
-	write(base+"/"+name+"controller/interface.go", template.ControllerInterface(name, withCRUD))
-	write(base+"/"+name+"controller/controller.go", template.Controller(name, withCRUD))
-
-	write(base+"/"+name+"routes/router.go", template.Router(name, withCRUD))
+	write(base+"/"+packg+"routes/router.go", template.Router(name, withCRUD))
 
 	// --- CRUD ---
 	if withCRUD {
-		write(base+"/"+name+"controller/crud.go", template.ControllerCRUD(name))
-		write(base+"/"+name+"service/crud.go", template.ServiceCRUD(name))
-		write(base+"/"+name+"repository/crud.go", template.RepositoryCRUD(name))
+		write(base+"/"+packg+"controller/crud.go", template.ControllerCRUD(name))
+		write(base+"/"+packg+"service/crud.go", template.ServiceCRUD(name))
+		write(base+"/"+packg+"repository/crud.go", template.RepositoryCRUD(name))
 		write(
-			"internal/request/"+name+"_request.go",
+			"internal/request/"+packg+"_request.go",
 			template.Request(name),
 		)
 
 	}
 
-	patchBootstrap(name)
+	patchBootstrap(packg)
 	patchRoutes(name)
 	util.GoFmt()
 	return nil

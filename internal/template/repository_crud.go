@@ -6,8 +6,11 @@ import (
 
 func RepositoryCRUD(name string) string {
 	module := goModule()
-	N := util.Title(name)
-	P := util.Title(util.Plural(name))
+	nn := util.NewName(name)
+	N := nn.Title()
+	name = nn.Package()
+	P := nn.TitlePlural()
+
 	p := name
 
 	return `package ` + p + `repository

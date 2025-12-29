@@ -5,7 +5,9 @@ import (
 )
 
 func ServiceCRUD(name string) string {
-	N := util.Title(name)
+	nn := util.NewName(name)
+	N := nn.Title()
+	name = nn.Package()
 	module := goModule()
 	p := name
 

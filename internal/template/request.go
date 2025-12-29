@@ -5,7 +5,9 @@ import (
 )
 
 func Request(name string) string {
-	N := util.Title(name)
+	nn := util.NewName(name)
+	N := nn.Title()
+
 	module := goModule()
 
 	return `package request

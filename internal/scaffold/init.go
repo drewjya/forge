@@ -31,6 +31,7 @@ func InitProject(module string) error {
 
 	write(module+"/go.mod", template.GoMod(module))
 	write(module+"/.env", template.Env())
+	write(module+"/makefile", template.MakeFile())
 	write(module+"/bobgen.yaml", template.BobgenYAML())
 
 	write(module+"/bootstrap/module.go", template.BootstrapRoot(module))

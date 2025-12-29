@@ -5,8 +5,12 @@ import (
 )
 
 func Router(name string, crud bool) string {
-	N := util.Title(name)
+	nn := util.NewName(name)
+	N := nn.Title()
+	name = nn.Package()
 	module := goModule()
+	routes := nn.KebabPlural()
+	println(routes)
 	if crud {
 
 		p := name
@@ -31,7 +35,7 @@ func New` + N + `Router(
 }
 
 func (r *` + N + `Router) RegisterRoutes(group *echo.Group) {
-		res := group.Group("/` + p + `s")
+		res := group.Group("/` + routes + `")
 
 		res.GET("", r.handler.GetAll)
 		res.POST("", r.handler.Create)

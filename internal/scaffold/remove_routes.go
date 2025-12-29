@@ -6,7 +6,10 @@ import (
 
 func removeFromRoutes(feature string) {
 	project := GoModule()
-	Feature := util.Title(feature)
+	nn := util.NewName(feature)
+	feature = nn.Package()
+	Feature := nn.Title()
+	println(nn.Snake() + " jsdjsdj")
 	path := "internal/routes/routes.go"
 	src := read(path)
 

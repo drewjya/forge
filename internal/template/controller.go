@@ -5,7 +5,9 @@ import (
 )
 
 func ControllerInterface(name string, crud bool) string {
-	N := util.Title(name)
+	nn := util.NewName(name)
+	N := nn.Title()
+	name = nn.Package()
 
 	if crud {
 		return `package ` + name + `controller
@@ -35,7 +37,9 @@ type I` + N + `Controller interface {
 
 func Controller(name string, crud bool) string {
 
-	N := util.Title(name)
+	nn := util.NewName(name)
+	N := nn.Title()
+	name = nn.Package()
 	module := goModule()
 	if crud {
 		return `package ` + name + `controller

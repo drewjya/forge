@@ -5,7 +5,9 @@ import (
 )
 
 func Module(name string) string {
-	n := util.Title(name)
+	nn := util.NewName(name)
+	n := nn.Title()
+	name = nn.Package()
 	m := goModule()
 
 	return `package ` + name + `
