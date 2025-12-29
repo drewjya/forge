@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/andre/forge/internal/util"
+	"github.com/drewjya/forge/internal/util"
 )
 
 func RemoveModule(feature string) error {

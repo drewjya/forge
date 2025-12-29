@@ -5,11 +5,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var initCmd = &cobra.Command{
-	Use:   "init [project]",
-	Short: "Initialize a new Go backend project",
+var moduleCmd = &cobra.Command{
+	Use:   "module [name]",
+	Short: "Generate a new application module",
 	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return scaffold.InitProject(args[0])
+		return scaffold.AddModule(args[0])
 	},
 }

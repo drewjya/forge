@@ -3,7 +3,7 @@ package scaffold
 import (
 	"strings"
 
-	"github.com/andre/forge/internal/util"
+	"github.com/drewjya/forge/internal/util"
 )
 
 func patchRoutes(feature string) {

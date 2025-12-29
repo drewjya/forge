@@ -1,7 +1,7 @@
 package template
 
 import (
-	"github.com/andre/forge/internal/util"
+	"github.com/drewjya/forge/internal/util"
 )
 
 func ServiceInterface(name string, crud bool) string {

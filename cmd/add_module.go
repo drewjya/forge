@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/andre/forge/internal/scaffold"
+	"github.com/drewjya/forge/internal/scaffold"
 	"github.com/spf13/cobra"
 )
 

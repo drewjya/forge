@@ -4,8 +4,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/andre/forge/internal/template"
-	"github.com/andre/forge/internal/util"
+	"github.com/drewjya/forge/internal/template"
+	"github.com/drewjya/forge/internal/util"
 )
 
 func AddModule(name string, withCRUD bool) error {

@@ -1,7 +1,7 @@
 package scaffold
 
 import (
-	"github.com/andre/forge/internal/util"
+	"github.com/drewjya/forge/internal/util"
 )
 
 func removeFromRoutes(feature string) {

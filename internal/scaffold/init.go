@@ -4,8 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/andre/forge/internal/template"
-	"github.com/andre/forge/internal/util"
+	"github.com/drewjya/forge/internal/template"
+	"github.com/drewjya/forge/internal/util"
 )
 
 func InitProject(module string) error {
