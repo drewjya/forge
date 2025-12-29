@@ -10,6 +10,7 @@ import (
 )
 
 type RouteDeps struct {
+	fx.In
 	// ::forge:deps::
 }
 

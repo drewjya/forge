@@ -5,6 +5,7 @@ import (
 	"os/exec"
 	"strings"
 
+	"github.com/gertd/go-pluralize"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 )
@@ -22,4 +23,10 @@ func GoFmt() {
 	if err := cmd.Run(); err != nil {
 		panic("gofmt failed")
 	}
+}
+
+var plural = pluralize.NewClient()
+
+func Plural(name string) string {
+	return plural.Plural(name)
 }

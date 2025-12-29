@@ -19,6 +19,7 @@ func InitProject(module string) error {
 		"internal/modules",
 		"internal/routes",
 		"internal/types",
+		"internal/request",
 		"migrations",
 	}
 
@@ -45,6 +46,8 @@ func InitProject(module string) error {
 
 	write(module+"/internal/routes/module.go", template.RoutesModule())
 	write(module+"/internal/routes/routes.go", template.Routes())
+	write(module+"/internal/types/ulid.go", template.ULIDRoot())
+	write(module+"/bootstrap/validation/validation.go", template.ValidationRoot())
 
 	write(module+"/cmd/api/main.go", template.Main(module))
 

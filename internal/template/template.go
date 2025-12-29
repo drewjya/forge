@@ -14,7 +14,7 @@ func goModule() string {
 	lines := strings.SplitSeq(string(data), "\n")
 	for line := range lines {
 		line = strings.TrimSpace(line)
-		if after, ok :=strings.CutPrefix(line, "module "); ok  {
+		if after, ok := strings.CutPrefix(line, "module "); ok {
 			return strings.TrimSpace(after)
 		}
 	}

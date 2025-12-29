@@ -24,17 +24,11 @@ func (s *` + N + `Service) GetAll(ctx context.Context) (models.` + N + `Slice, e
 }
 
 func (s *` + N + `Service) Create(ctx context.Context, req request.` + N + `Request) error {
-	setter := models.` + N + `Setter{
-		Name: req.Name,
-	}
-	return s.Repository.Create(ctx, setter)
+	return s.Repository.Create(ctx, req.ToSetter())
 }
 
 func (s *` + N + `Service) Update(ctx context.Context, id types.ULID, req request.` + N + `Request) error {
-	setter := models.` + N + `Setter{
-		Name: req.Name,
-	}
-	return s.Repository.Update(ctx, id, setter)
+	return s.Repository.Update(ctx, id, req.ToSetter())
 }
 
 func (s *` + N + `Service) Delete(ctx context.Context, id types.ULID) error {

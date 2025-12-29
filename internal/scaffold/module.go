@@ -41,6 +41,11 @@ func AddModule(name string, withCRUD bool) error {
 		write(base+"/"+name+"controller/crud.go", template.ControllerCRUD(name))
 		write(base+"/"+name+"service/crud.go", template.ServiceCRUD(name))
 		write(base+"/"+name+"repository/crud.go", template.RepositoryCRUD(name))
+		write(
+			"internal/request/"+name+"_request.go",
+			template.Request(name),
+		)
+
 	}
 
 	patchBootstrap(name)
