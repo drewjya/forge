@@ -1,0 +1,55 @@
+package template
+
+import (
+	"github.com/andre/forge/internal/util"
+)
+
+func RepositoryCRUD(name string) string {
+	module := goModule()
+	N := util.Title(name)
+	p := name
+
+	return `package ` + p + `repository
+
+import (
+	"context"
+
+	"` + module + `/gen/models"
+	"` + module + `/internal/types"
+
+	"github.com/stephenafamo/bob"
+	"github.com/stephenafamo/bob/dialect/psql/dialect"
+)
+
+func (r *` + N + `Repository) GetAll(ctx context.Context, mods ...bob.Mod[*dialect.SelectQuery]) (models.` + N + `Slice, error) {
+	return models.` + N + `s.Query(mods...).All(ctx, r.Executor)
+}
+
+func (r *` + N + `Repository) GetByID(ctx context.Context, id types.ULID) *models.` + N + ` {
+	row, _ := models.` + N + `s.Query(
+		models.SelectWhere.` + N + `s.ID.EQ(id.String()),
+	).One(ctx, r.Executor)
+	return row
+}
+
+func (r *` + N + `Repository) Create(ctx context.Context, setter models.` + N + `Setter) error {
+	_, err := models.` + N + `s.Insert(&setter).One(ctx, r.Executor)
+	return err
+}
+
+func (r *` + N + `Repository) Update(ctx context.Context, id types.ULID, setter models.` + N + `Setter) error {
+	_, err := models.` + N + `s.Update(
+		models.UpdateWhere.` + N + `s.ID.EQ(id.String()),
+		setter.UpdateMod(),
+	).One(ctx, r.Executor)
+	return err
+}
+
+func (r *` + N + `Repository) Delete(ctx context.Context, id types.ULID) error {
+	_, err := models.` + N + `s.Delete(
+		models.DeleteWhere.` + N + `s.ID.EQ(id.String()),
+	).Exec(ctx, r.Executor)
+	return err
+}
+`
+}
